@@ -294,10 +294,11 @@ function addCheckin_(email, body) {
 
 function deleteCheckin_(email, body) {
   const row = findBy_("Checkins", "id", String(body.id || ""));
-  if (!row || row.ownerEmail !== email) throw new Error("Отметка не найдена");
+  if (!row) return { ok: true, deleted: 0 };
+  if (row.ownerEmail !== email) throw new Error("Отметка не найдена");
   sheet_("Checkins").deleteRow(row._row);
   delete ROW_CACHE_.Checkins;
-  return { ok: true };
+  return { ok: true, deleted: 1 };
 }
 
 function deleteCheckins_(email, body) {
@@ -438,12 +439,18 @@ function getDatabase_() {
   const needsMigration = props.getProperty("DB_SCHEMA_VERSION") !== DB_SCHEMA_VERSION;
   Object.keys(TABLES).forEach(function (name) {
     let sheet = db.getSheetByName(name);
-    if (!sheet) sheet = db.insertSheet(name);
-    ensureSheetSchema_(sheet, name, needsMigration);
+    if (!sheet) {
+      sheet = db.insertSheet(name);
+      ensureSheetSchema_(sheet, name, true);
+    } else if (needsMigration) {
+      ensureSheetSchema_(sheet, name, true);
+    }
   });
-  props.setProperty("DB_SCHEMA_VERSION", DB_SCHEMA_VERSION);
-  const first = db.getSheetByName("Sheet1") || db.getSheetByName("Лист1");
-  if (first && Object.keys(TABLES).indexOf(first.getName()) === -1 && db.getSheets().length > Object.keys(TABLES).length) db.deleteSheet(first);
+  if (needsMigration) {
+    props.setProperty("DB_SCHEMA_VERSION", DB_SCHEMA_VERSION);
+    const first = db.getSheetByName("Sheet1") || db.getSheetByName("Лист1");
+    if (first && Object.keys(TABLES).indexOf(first.getName()) === -1 && db.getSheets().length > Object.keys(TABLES).length) db.deleteSheet(first);
+  }
   DB_CACHE_ = db;
   return DB_CACHE_;
 }
