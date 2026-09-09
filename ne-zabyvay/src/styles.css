@@ -96,6 +96,16 @@ h1, h2, h3, strong { font-weight: 700; }
 .design-care-icon { width: 62px; height: 62px; min-width: 62px; border-radius: 50%; position: relative; overflow: hidden; display: grid; place-items: center; background: var(--cream); box-shadow: 0 9px 14px #4d362616; }
 .design-care-icon svg { width: 39px; height: 39px; fill: currentColor; stroke: none; }
 .design-care-icon svg .glyph-cut { fill: var(--cream); }
+.design-care-icon svg .heart-pulse,
+.goal-section-symbol svg .heart-pulse,
+.section-symbol svg .heart-pulse,
+.category-stat-icon svg .heart-pulse {
+  fill: none;
+  stroke: var(--cream);
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 .design-care-icon.water { color: var(--blue); }
 .design-care-icon.food, .design-care-icon.heart { color: var(--orange); }
 .design-care-icon.rest { color: var(--yellow); }
