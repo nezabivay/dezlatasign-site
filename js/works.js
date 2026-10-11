@@ -4,6 +4,7 @@
   });
 
   const featuredProjects = document.querySelector('#identity .featured-projects');
+  findGallery('Музей Выксы')?.remove();
 
   if (featuredProjects && !findGallery('Прудыкс')) {
     const prudyksGallery = document.createElement('article');
@@ -30,10 +31,8 @@
     `;
 
     const bombGallery = findGallery('Bomb Coffee');
-    const museumGallery = findGallery('Музей Выксы');
     if (bombGallery) featuredProjects.appendChild(bombGallery);
     featuredProjects.appendChild(prudyksGallery);
-    if (museumGallery) featuredProjects.appendChild(museumGallery);
   }
 
   const ensureSectionGallery = ({ sectionId, title, eyebrow, description, slug, total, width, height }) => {
@@ -177,7 +176,6 @@
 
   hydrateGallery({ title: 'Bomb Coffee', slug: 'bomb-coffee', width: 1800, height: 1273, total: 6 });
   hydrateGallery({ title: 'Прудыкс', slug: 'prudyks', width: 842, height: 595, total: 7 });
-  hydrateGallery({ title: 'Музей Выксы', slug: 'museum-vyksa', width: 1600, height: 1131, total: 6 });
 
   const dialog = document.querySelector('[data-lightbox-dialog]');
   const dialogImage = document.querySelector('[data-lightbox-image]');
