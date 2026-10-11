@@ -194,8 +194,8 @@
       hydrateProjectCards({ projectCards: prudyksCards, title: 'Прудыкс', slug: 'prudyks', width: 842, height: 595, total: 7 });
 
       const groups = [
-        { title: 'Bomb Coffee', cards: bombCards },
-        { title: 'Прудыкс', description: 'Концепт айдентики Верхнего пруда Выксы', cards: prudyksCards }
+        { title: 'Прудыкс', description: 'Концепт айдентики Верхнего пруда Выксы', cards: prudyksCards },
+        { title: 'Bomb Coffee', cards: bombCards }
       ];
 
       projectGrid.innerHTML = '';
