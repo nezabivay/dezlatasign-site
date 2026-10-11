@@ -114,7 +114,7 @@
   if (projectGrid) {
     const cards = [...projectGrid.querySelectorAll('.project-card')];
 
-    if (cards.length >= 6) {
+    if (cards.length >= 3) {
       const galleryStyles = document.createElement('style');
       galleryStyles.textContent = `
         .projects .project-grid { display: block; }
@@ -153,7 +153,6 @@
       document.head.appendChild(galleryStyles);
 
       const bombCards = cards.slice(0, 3);
-      const museumCards = cards.slice(3, 6);
       const prudyksCards = [];
 
       const hydrateProjectCards = ({ projectCards, title, slug, width, height, total }) => {
@@ -193,12 +192,10 @@
 
       hydrateProjectCards({ projectCards: bombCards, title: 'Bomb Coffee', slug: 'bomb-coffee', width: 1800, height: 1273, total: 6 });
       hydrateProjectCards({ projectCards: prudyksCards, title: 'Прудыкс', slug: 'prudyks', width: 842, height: 595, total: 7 });
-      hydrateProjectCards({ projectCards: museumCards, title: 'Музей Выксы', slug: 'museum-vyksa', width: 1600, height: 1131, total: 6 });
 
       const groups = [
         { title: 'Bomb Coffee', cards: bombCards },
-        { title: 'Прудыкс', description: 'Концепт айдентики Верхнего пруда Выксы', cards: prudyksCards },
-        { title: 'Музей Выксы', cards: museumCards }
+        { title: 'Прудыкс', description: 'Концепт айдентики Верхнего пруда Выксы', cards: prudyksCards }
       ];
 
       projectGrid.innerHTML = '';
